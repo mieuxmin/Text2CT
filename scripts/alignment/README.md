@@ -17,9 +17,9 @@ scripts/alignment/
 
 ### 1. Neuroimaging Latent
 
-- **위치**: `/storage/bigdata/UKB_LDM/autoencoder_output/run_77481/brain_latent`
+- **위치**: 
 - **형식**: `{IID}_latent.npz`
-- **Shape**: (3, 15, 18, 15)
+- **Shape**:
 - **처리**: flatten하여 (12150,) 벡터로 사용
 
 ### 2. Gene Embedding
@@ -51,7 +51,7 @@ python scripts/alignment/train_neuro_gene_alignment.py \
 ### 주요 하이퍼파라미터
 
 #### 데이터 관련
-- `--brain_latent_dir`: Neuroimaging latent 디렉토리 (기본값: `/storage/bigdata/UKB_LDM/autoencoder_output/run_77481/brain_latent`)
+- `--brain_latent_dir`: Neuroimaging latent 디렉토리 
 - `--gene_embedding_path`: Gene embedding 파일 경로 (필수)
 - `--iid_column`: IID 열 이름 (기본값: `IID`)
 - `--gene_embedding_dim`: Gene embedding 차원 (기본값: 256)
