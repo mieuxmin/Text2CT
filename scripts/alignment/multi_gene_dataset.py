@@ -112,12 +112,14 @@ class MultiGeneNeuroDataset(Dataset):
 
         # Get IIDs that have all gene embeddings
         if mode == 'single':
-            available_gene_iids = set(self.gene_df[iid_column].astype(str).values)
+            # IID is now the index, not a column
+            available_gene_iids = set(self.gene_df.index.astype(str).values)
         else:
             # Intersection of all genes
             available_gene_iids = None
             for gene_name, df in self.gene_dfs.items():
-                gene_iids = set(df[iid_column].astype(str).values)
+                # IID is now the index, not a column
+                gene_iids = set(df.index.astype(str).values)
                 if available_gene_iids is None:
                     available_gene_iids = gene_iids
                 else:
