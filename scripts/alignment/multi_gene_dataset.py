@@ -143,7 +143,14 @@ class MultiGeneNeuroDataset(Dataset):
             raise ValueError(f"Column '{self.iid_column}' not found in {fpath}")
 
         # Set IID as index for faster lookup
-        df[self.iid_column] = df[self.iid_column].astype(str)
+        # Convert float IIDs (e.g., 1234567.0) to int first, then to string
+        # This removes the .0 suffix
+        try:
+            df[self.iid_column] = df[self.iid_column].astype(float).astype(int).astype(str)
+        except (ValueError, TypeError):
+            # If conversion fails, just convert to string directly
+            df[self.iid_column] = df[self.iid_column].astype(str)
+
         df = df.set_index(self.iid_column)
 
         # Get embedding columns
