@@ -258,12 +258,18 @@ def main(args):
     # Initialize model
     logger.info("Initializing model...")
 
+    # Auto-enable transformer for sequence mode if not explicitly set
+    use_transformer = args.use_transformer
+    if not use_transformer and num_genes > 1:
+        logger.info("Auto-enabling transformer for multi-gene sequence mode")
+        use_transformer = True
+
     model = MultiGeneAlignmentModel(
         neuro_input_dim=neuro_dim,
         gene_input_dim=args.gene_embedding_dim,
         num_genes=num_genes,
         projection_dim=args.projection_dim,
-        use_transformer=args.use_transformer,
+        use_transformer=use_transformer,
         transformer_hidden_dim=args.transformer_hidden_dim,
         transformer_num_layers=args.transformer_num_layers,
         transformer_num_heads=args.transformer_num_heads,
